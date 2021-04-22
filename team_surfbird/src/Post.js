@@ -12,7 +12,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 function Post(props) {
   return (
-    <List className="post_list">
+    <List className="post_list" style={{background: "cyan"}}>
       <Grid container spacing={24} justify="center">
         <Grid item>
           <ListItem>
@@ -60,7 +60,7 @@ function Post(props) {
         <Grid item>
           <ListItemText
                   primary=""
-                  secondary={props.post.timestamp}
+                  // secondary={props.post.timestamp}
                   style={{ marginLeft: "1em" }}
                 />
           </Grid>

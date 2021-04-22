@@ -45,7 +45,7 @@ function Home() {
 
   useEffect(() => {
     console.log(localStorage.getItem("user"));
-    db.collection("posts").where("userId", "==", localStorage.getItem("user")).orderBy("timestamp", "asc").onSnapshot((snapshot) => {
+    db.collection("posts").orderBy("timestamp", "asc").onSnapshot((snapshot) => {
         console.log("firebase result");
         console.log(snapshot.docs);
         setPosts(
@@ -55,7 +55,7 @@ function Home() {
             description: doc.data().text,
             duration: doc.data().read_time,
             user: doc.data().userId,
-            timestamp: doc.data().timestamp.toDate().toISOString()
+            timestamp: "doc.data().timestamp.toDate().toString()",
           }))
         );
       });
@@ -88,7 +88,7 @@ function Home() {
       text: description,
       read_time: duration,
       userId: localStorage.getItem("user"),
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      timestamp: "firebase.firestore.FieldValue.serverTimestamp()"
     });
 
     console.log(localStorage.getItem("user"));
@@ -96,7 +96,7 @@ function Home() {
       db.collection("posts").where("user", "==", localStorage.getItem("user")).get()
     );
 
-    setPosts([...posts, title, description]);
+    setPosts([...posts, title, description, duration]);
     setInput("");
     setTitle("");
     setDescription("");
@@ -107,9 +107,9 @@ function Home() {
     <div className="Home">
       <Grid container justify="center" alignItems="center">
         <Grid item>
-          <h1>To-Do</h1>
+          <h1>*App Name Here*</h1>
           <Button onClick={logOut} color="primary">
-            Log Outie
+            Log Out
           </Button>
         </Grid>
       </Grid>

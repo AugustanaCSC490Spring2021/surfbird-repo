@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import './App.css';
 import { firebaseApp } from './firebase';
+
+import { BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import Home from './Home';
 import Login from './Login';
+import Profile from './Profile';
+
 
 
 class App extends Component {
   constructor() {
     super();
     this.state = ({
-      user: null,
+      user: null
+
     });
     this.authListener = this.authListener.bind(this);
   }
@@ -40,7 +45,18 @@ class App extends Component {
         (
         <Login />
         )
+        
+
       }
+
+      {/* <Router>
+        <Switch>
+          <Route exact path="/Home" component={Home}/>
+          <Route exact path="/Login" component={Login}/>
+          <Route exact path="/Profile" component={Profile}/>
+        </Switch>
+      </Router> */}
+
       </div>
     )
   }

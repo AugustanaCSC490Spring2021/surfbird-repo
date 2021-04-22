@@ -4,7 +4,10 @@ import { Button, FormControl, Input, InputLabel, GridList, Grid } from '@materia
 import Todo from './Todo.js';
 import db from './firebase';
 import { firebaseApp, logOut } from './firebase';
+
+
 import firebase from 'firebase';
+import NavBar from './NavBar';
 
     function Home() {
 
@@ -43,6 +46,8 @@ import firebase from 'firebase';
             <div className="Home">
                 <Grid container justify='center' alignItems='center'>
                     <Grid item>
+                        <NavBar />
+                        
                         <h1>To-Do</h1>
                         <Button onClick={ logOut } color='primary'>
                             Log Outie

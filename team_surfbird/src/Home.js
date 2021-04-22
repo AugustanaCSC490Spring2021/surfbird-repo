@@ -13,6 +13,7 @@ import Post from "./Post.js";
 import db from "./firebase";
 import { firebaseApp, logOut } from "./firebase";
 import firebase from "firebase";
+import NavBar from "./NavBar"
 
 function Home() {
   const [todos, setTodos] = useState([]);
@@ -107,10 +108,9 @@ function Home() {
     <div className="Home">
       <Grid container justify="center" alignItems="center">
         <Grid item>
+            <NavBar />
           <h1>*App Name Here*</h1>
-          <Button onClick={logOut} color="primary">
-            Log Out
-          </Button>
+
         </Grid>
       </Grid>
 

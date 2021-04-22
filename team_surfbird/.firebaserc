@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "project-surfbird",
+    "default": "project-surfbird"
     "todo-demo": "todo-demo3"
   }
 }

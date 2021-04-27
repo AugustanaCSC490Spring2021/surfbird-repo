@@ -13,9 +13,9 @@ import Post from "./Post";
 import db from "../../firebase";
 import { firebaseApp, logOut } from "../../firebase";
 import firebase from "firebase";
-import NavBar from "../nav/NavBar"
+import NavBar from "../nav/NavBar";
 
-function Home() {
+function Home(props) {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
   const [time, setTime] = useState("");
@@ -26,27 +26,11 @@ function Home() {
   const [description, setDescription] = useState("");
   const [duration, setDuration] = useState("");
 
-  //code modeled after https://www.youtube.com/watch?v=VqgTr-nd7Cg&ab_channel=CleverProgrammer
-  /*   useEffect(() => {
-    console.log(localStorage.getItem("user"));
-    db.collection("todos")
-      .orderBy("deadline", "asc")
-      .onSnapshot((snapshot) => {
-        console.log("firebase result");
-        console.log(snapshot.docs);
-        setTodos(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            text: doc.data().text,
-            deadline: doc.data().deadline,
-          }))
-        );
-      });
-  }, []); */
-
   useEffect(() => {
     console.log(localStorage.getItem("user"));
-    db.collection("posts").orderBy("timestamp", "asc").onSnapshot((snapshot) => {
+    db.collection("posts")
+      .orderBy("timestamp", "asc")
+      .onSnapshot((snapshot) => {
         console.log("firebase result");
         console.log(snapshot.docs);
         setPosts(
@@ -74,7 +58,10 @@ function Home() {
 
     console.log(localStorage.getItem("user"));
     console.log(
-      db.collection("todos").where("userId", "==", localStorage.getItem("user")).get()
+      db
+        .collection("todos")
+        .where("userId", "==", localStorage.getItem("user"))
+        .get()
     );
 
     setTodos([...todos, input]);
@@ -89,12 +76,15 @@ function Home() {
       text: description,
       read_time: duration,
       userId: localStorage.getItem("user"),
-      timestamp: "firebase.firestore.FieldValue.serverTimestamp()"
+      timestamp: "firebase.firestore.FieldValue.serverTimestamp()",
     });
 
     console.log(localStorage.getItem("user"));
     console.log(
-      db.collection("posts").where("user", "==", localStorage.getItem("user")).get()
+      db
+        .collection("posts")
+        .where("user", "==", localStorage.getItem("user"))
+        .get()
     );
 
     setPosts([...posts, title, description, duration]);
@@ -108,9 +98,7 @@ function Home() {
     <div className="Home">
       <Grid container justify="center" alignItems="center">
         <Grid item>
-            <NavBar />
-          <h1 style = {{marginTop: "15vh"}}>*App Name Here*</h1>
-
+          <h1>*App Name Here*</h1>
         </Grid>
       </Grid>
 

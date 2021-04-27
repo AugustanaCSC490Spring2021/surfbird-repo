@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import './App.css';
-import { firebaseApp } from './firebase';
-import Home from './components/feed/Home';
-import Login from './components/login/Login';
-
+import React, { Component } from "react";
+import "./App.css";
+import { firebaseApp } from "./firebase";
+import Home from "./components/feed/Home";
+import Intermediate from "./components/Intermediate";
+import Login from "./components/login/Login";
 
 class App extends Component {
   constructor() {
     super();
-    this.state = ({
+    this.state = {
       user: null,
-    });
+    };
     this.authListener = this.authListener.bind(this);
   }
 
@@ -23,27 +23,16 @@ class App extends Component {
       console.log(user);
       if (user) {
         this.setState({ user });
-        localStorage.setItem('user', user.uid);
+        localStorage.setItem("user", user.uid);
       } else {
         this.setState({ user: null });
-        localStorage.removeItem('user');
+        localStorage.removeItem("user");
       }
     });
   }
   render() {
-    return (
-     <div>
-      {this.state.user ? 
-        (
-        <Home />
-        ) :
-        (
-        <Login />
-        )
-      }
-      </div>
-    )
+    return <div>{this.state.user ? <Intermediate /> : <Login />}</div>;
   }
 }
 
- export default App;
+export default App;

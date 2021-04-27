@@ -1,10 +1,10 @@
 import React from "react";
 import {Tab, Tabs, AppBar } from "@material-ui/core";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
-import { logOut } from './firebase';
+import { logOut } from './../../firebase';
  
-import OtherPage from './OtherPage';
-import Profile from './Profile';
+import OtherPage from './../../OtherPage';
+import Profile from './../../Profile';
  
  
  

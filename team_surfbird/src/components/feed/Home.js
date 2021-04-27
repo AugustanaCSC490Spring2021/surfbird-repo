@@ -8,12 +8,12 @@ import {
   GridList,
   Grid,
 } from "@material-ui/core";
-import Todo from "./Todo.js";
-import Post from "./Post.js";
-import db from "./firebase";
-import { firebaseApp, logOut } from "./firebase";
+import Todo from "../../Todo.js";
+import Post from "./Post";
+import db from "../../firebase";
+import { firebaseApp, logOut } from "../../firebase";
 import firebase from "firebase";
-import NavBar from "./NavBar"
+import NavBar from "../nav/NavBar"
 
 function Home() {
   const [todos, setTodos] = useState([]);

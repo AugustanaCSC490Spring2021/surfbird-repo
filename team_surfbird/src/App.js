@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import { firebaseApp } from './firebase';
-import Home from './Home';
-import Login from './Login';
+import Home from './components/feed/Home';
+import Login from './components/login/Login';
 
 
 class App extends Component {

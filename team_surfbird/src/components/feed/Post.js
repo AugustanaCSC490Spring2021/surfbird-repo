@@ -10,66 +10,67 @@ import {
 import db from "./../../firebase";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-function Post(props) {
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+
+const useStyles = makeStyles({
+  root: {
+    minWidth: 275,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
+
+export default function SimpleCard(props) {
+  const classes = useStyles();
+  const bull = <span className={classes.bullet}>•</span>;
+
   return (
-    <div>
-    <List className="post_list" style={{background: "cyan"}}>
-      <Grid container spacing={24} justify="center">
-        <Grid item>
-          <ListItem>
-            <ListItemText
-              disableTypography
-              primary={props.post.title}
-              style={{ marginRight: "1em", fontSize: "large", font: "sans-serif"}}
-            />
-            
-          </ListItem>
-        </Grid>
-      </Grid>
-      <Grid container justify="flex-end">
-        <DeleteIcon
-                fontSize="small"
-                onClick={(event) =>
-                  db.collection("posts").doc(props.post.id).delete()
-                }
-              />
-      </Grid>
-      <Grid container spacing={24} justify="center" alignContent="center">
-        <Grid>
-          <ListItem>
-            <ListItemText
-                primary={props.post.description}
-                style={{ marginLeft: "1em" }}
-              />
-          </ListItem>
-          
-        </Grid>
-      </Grid>
-      <Grid container spacing={24} justify="center" alignContent="center">
-        <Grid>
-          <ListItem>
-            <ListItemText
-                primary={props.post.duration}
-                style={{ marginLeft: "1em" }}
-              />
-          </ListItem>
-          
-        </Grid>
+    <Card className={classes.root}>
+      <CardHeader>
+        test {props.post.user}
+      </CardHeader>
+      <CardContent>
+        <Typography className={classes.title} color="textSecondary" gutterBottom>
+        Username Eventually: {props.post.user} 
+        </Typography>
         
-      </Grid>
-      <Grid container justify="flex-end">
-        <Grid item>
-          <ListItemText
-                  primary=""
-                  // secondary={props.post.timestamp}
-                  style={{ marginLeft: "1em" }}
-                />
-          </Grid>
-      </Grid>
-    </List>
-    <br></br>
-    </div>
+        <Typography variant="h5" component="h2">
+        Media: {props.post.title}
+        </Typography>
+       
+        <Typography variant="body2" component="p">
+          {props.post.description}
+        </Typography>
+
+      </CardContent>
+      <CardActions>
+      <Button
+            color="secondary"
+            disabled={
+              localStorage.getItem("user") === props.post.user ? false : true
+            }
+            fontSize="small"
+            onClick={(event) =>
+              db.collection("posts").doc(props.post.id).delete()
+            }
+          >
+            Delete
+          </Button>
+      </CardActions>
+    </Card>
   );
 }
-
-export default Post;

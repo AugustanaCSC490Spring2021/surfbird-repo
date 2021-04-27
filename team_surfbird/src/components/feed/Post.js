@@ -56,6 +56,10 @@ export default function SimpleCard(props) {
           {props.post.description}
         </Typography>
 
+        <Typography variant="body2" component="p">
+          {props.post.duration}
+        </Typography>
+
       </CardContent>
       <CardActions>
       <Button

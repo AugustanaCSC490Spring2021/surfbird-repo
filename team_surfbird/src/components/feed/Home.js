@@ -98,7 +98,7 @@ function Home(props) {
     <div className="Home">
       <Grid container justify="center" alignItems="center">
         <Grid item>
-          <h1>*App Name Here*</h1>
+          <h1 style = {{marginTop: "15vh"}}>*App Name Here*</h1>
         </Grid>
       </Grid>
 

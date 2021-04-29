@@ -3,7 +3,7 @@ import "./App.css";
 import { firebaseApp } from "./firebase";
 import Home from "./components/feed/Home";
 import Intermediate from "./components/Intermediate";
-import Login from "./components/login/Login";
+import Login from "./components/LoginIntermediate";
 
 class App extends Component {
   constructor() {

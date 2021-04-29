@@ -53,7 +53,7 @@ class Login extends Component {
           <br />
           <br />
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
+            <label for="exampleInputEmail1">YEET!!!!!!!!!!!</label>
             <input
               value={this.state.email}
               onChange={this.handleChange}

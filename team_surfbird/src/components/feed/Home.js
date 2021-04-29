@@ -40,33 +40,10 @@ function Home(props) {
             description: doc.data().text,
             duration: doc.data().read_time,
             user: doc.data().userId,
-            timestamp: "doc.data().timestamp.toDate().toString()",
           }))
         );
       });
   }, []);
-
-  const addTodo = (event) => {
-    event.preventDefault();
-
-    db.collection("todos").add({
-      text: input,
-      deadline: time,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      userId: localStorage.getItem("user"),
-    });
-
-    console.log(localStorage.getItem("user"));
-    console.log(
-      db
-        .collection("todos")
-        .where("userId", "==", localStorage.getItem("user"))
-        .get()
-    );
-
-    setTodos([...todos, input]);
-    setInput("");
-  };
 
   const addPost = (event) => {
     event.preventDefault();
@@ -76,7 +53,9 @@ function Home(props) {
       text: description,
       read_time: duration,
       userId: localStorage.getItem("user"),
-      timestamp: "firebase.firestore.FieldValue.serverTimestamp()",
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      likes: [],
+      comments: [],
     });
 
     console.log(localStorage.getItem("user"));
@@ -98,7 +77,7 @@ function Home(props) {
     <div className="Home">
       <Grid container justify="center" alignItems="center">
         <Grid item>
-          <h1>*App Name Here*</h1>
+          <h1 style={{ marginTop: "15vh" }}>*App Name Here*</h1>
         </Grid>
       </Grid>
 

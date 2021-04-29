@@ -3,11 +3,11 @@ import { Tab, Tabs, AppBar } from "@material-ui/core";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import { logOut } from "./../../firebase";
 
-import Profile from "./../../../../team_surfbird/src/components/profile/profile.js";
-import Home from "../../../src/components/feed/Home";
+import Login from "./../../../../team_surfbird/src/components/login/Login.js";
+import Signup from "../../../src/components/login/Signup.js";
 
 export default function NavBar() {
-  const routes = ["/Home", "/OtherPage"];
+  const routes = ["/Login", "/Signup"];
 
   return (
     <div className="NavBar">
@@ -16,25 +16,24 @@ export default function NavBar() {
           <AppBar>
             <Tabs>
               <Tab
-                label="Home"
+                label="Login"
                 value={routes[0]}
                 component={Link}
                 to={routes[0]}
               />
               <Tab
-                label="Profile"
+                label="Signup"
                 value={routes[1]}
                 component={Link}
                 to={routes[1]}
               />
-              <Tab label="Log Out" onClick={logOut} />
             </Tabs>
           </AppBar>
         </Route>
 
         <Switch>
-          <Route path="/Home" component={Home} />
-          <Route path="/Profile" component={Profile} />
+          <Route path="/Login" component={Login} />
+          <Route path="/Signup" component={Signup} />
         </Switch>
       </BrowserRouter>
     </div>

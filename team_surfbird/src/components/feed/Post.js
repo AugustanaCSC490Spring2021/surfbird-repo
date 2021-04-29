@@ -5,26 +5,26 @@ import {
   ListItemText,
   Button,
   GridList,
-  Grid
+  Grid,
 } from "@material-ui/core";
 import db from "./../../firebase";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
   },
   bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+    display: "inline-block",
+    margin: "0 2px",
+    transform: "scale(0.8)",
   },
   title: {
     fontSize: 14,
@@ -40,36 +40,44 @@ export default function SimpleCard(props) {
 
   return (
     <Card className={classes.root}>
-      <CardHeader>
-        test {props.post.user}
-      </CardHeader>
+      <CardHeader>test {props.post.user}</CardHeader>
       <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-        Username Eventually: {props.post.user} 
+        <Typography
+          className={classes.title}
+          color="textSecondary"
+          gutterBottom
+        >
+          Username Eventually: {props.post.user}
         </Typography>
-        
+
         <Typography variant="h5" component="h2">
-        Media: {props.post.title}
+          Media: {props.post.title}
         </Typography>
-       
+
         <Typography variant="body2" component="p">
           {props.post.description}
         </Typography>
-
       </CardContent>
       <CardActions>
-      <Button
-            color="secondary"
-            disabled={
-              localStorage.getItem("user") === props.post.user ? false : true
-            }
-            fontSize="small"
-            onClick={(event) =>
-              db.collection("posts").doc(props.post.id).delete()
-            }
-          >
-            Delete
-          </Button>
+        <Button>Like</Button>
+        <Button>Comment</Button>
+        <Button
+          color="secondary"
+          disabled={
+            localStorage.getItem("user") === props.post.user ? false : true
+          }
+          visibility={
+            localStorage.getItem("user") === props.post.user
+              ? "hidden"
+              : "hidden"
+          }
+          fontSize="small"
+          onClick={(event) =>
+            db.collection("posts").doc(props.post.id).delete()
+          }
+        >
+          Delete
+        </Button>
       </CardActions>
     </Card>
   );

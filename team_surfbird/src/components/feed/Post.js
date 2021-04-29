@@ -59,7 +59,17 @@ export default function SimpleCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button>Like</Button>
+      <Button
+          onClick={(event) =>
+            db
+              .collection("posts")
+              .doc(props.post.id)
+              .set({ likes: localStorage.getItem("user") }, { merge: true })
+          }
+        >
+          Like
+        </Button>
+
         <Button>Comment</Button>
         <Button
           color="secondary"

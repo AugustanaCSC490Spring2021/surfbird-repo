@@ -107,7 +107,7 @@ class Signup extends Component {
                         label="First Name"
                         autoFocus
                         defaultValue={this.state.firstName}
-                        onClick={this.handleChange}
+                        onChange={this.handleChange}
                     />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -120,7 +120,7 @@ class Signup extends Component {
                         name="lastName"
                         autoComplete="lname"
                         defaultValue={this.state.lastName}
-                        onClick={this.handleChange}
+                        onChange={this.handleChange}
                     />
                     </Grid>
                     <Grid item xs={12}>
@@ -133,7 +133,7 @@ class Signup extends Component {
                         name="email"
                         autoComplete="email"
                         defaultValue={this.state.email}
-                        onClick={this.handleChange}
+                        onChange={this.handleChange}
                     />
                     </Grid>
                     <Grid item xs={12}>
@@ -147,7 +147,7 @@ class Signup extends Component {
                         id="password"
                         autoComplete="current-password"
                         defaultValue={this.state.password}
-                        onClick={this.handleChange}
+                        onChange={this.handleChange}
                     />
                     </Grid>
                 </Grid>

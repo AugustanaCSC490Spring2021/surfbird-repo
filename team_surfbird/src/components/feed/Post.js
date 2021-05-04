@@ -16,6 +16,8 @@ import CardActions from "@material-ui/core/CardActions";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import firebase from "firebase/app";
+
 
 const useStyles = makeStyles({
   root: {
@@ -63,7 +65,15 @@ export default function SimpleCard(props) {
             db
               .collection("posts")
               .doc(props.post.id)
-              .set({ likes: localStorage.getItem("user") }, { merge: true })
+              .update(
+                {
+                  likes: firebase.firestore.FieldValue.arrayUnion(
+                    localStorage.getItem("user")
+                  ),
+                  likesCount: Number(props.post.likesCount + 1),
+                },
+                { merge: true }
+              )
           }
         >
           Like

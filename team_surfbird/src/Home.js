@@ -27,7 +27,9 @@ class Home extends Component {
 
   useEffect(() => {
     console.log(localStorage.getItem("user"));
-    db.collection("posts").orderBy("timestamp", "asc").onSnapshot((snapshot) => {
+    db.collection("posts")
+      .orderBy("timestamp", "asc")
+      .onSnapshot((snapshot) => {
         console.log("firebase result");
         console.log(snapshot.docs);
         setPosts(
@@ -37,12 +39,12 @@ class Home extends Component {
             description: doc.data().text,
             duration: doc.data().read_time,
             user: doc.data().userId,
-            timestamp: "doc.data().timestamp.toDate().toString()",
+            likes: doc.data().likes,
           }))
         );
       });
   }, []);
-
+  
   const addPost = (event) => {
     event.preventDefault();
 

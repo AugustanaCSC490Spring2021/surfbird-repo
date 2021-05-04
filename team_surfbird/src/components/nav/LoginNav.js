@@ -4,10 +4,10 @@ import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import { logOut } from "./../../firebase";
 
 import Login from "./../../../../team_surfbird/src/components/login/Login.js";
-import Signup from "../../../src/components/login/Signup.js";
+import SignUp from "../../../src/components/login/SignUp.js";
 
 export default function NavBar() {
-  const routes = ["/Login", "/Signup"];
+  const routes = ["/Login", "/SignUp"];
 
   return (
     <div className="NavBar">
@@ -22,7 +22,7 @@ export default function NavBar() {
                 to={routes[0]}
               />
               <Tab
-                label="Signup"
+                label="SignUp"
                 value={routes[1]}
                 component={Link}
                 to={routes[1]}
@@ -33,7 +33,7 @@ export default function NavBar() {
 
         <Switch>
           <Route path="/Login" component={Login} />
-          <Route path="/Signup" component={Signup} />
+          <Route path="/SignUp" component={SignUp} />
         </Switch>
       </BrowserRouter>
     </div>

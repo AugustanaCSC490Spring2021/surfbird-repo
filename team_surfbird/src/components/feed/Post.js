@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import db from "./../../firebase";
 import DeleteIcon from "@material-ui/icons/Delete";
-
+import firebase from "firebase/app";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -59,7 +59,24 @@ export default function SimpleCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button>Like</Button>
+        <Button
+          onClick={(event) =>
+            db
+              .collection("posts")
+              .doc(props.post.id)
+              .update(
+                {
+                  likes: firebase.firestore.FieldValue.arrayUnion(
+                    localStorage.getItem("user")
+                  ),
+                  likesCount: Number(props.post.likesCount + 1),
+                },
+                { merge: true }
+              )
+          }
+        >
+          Like
+        </Button>
         <Button>Comment</Button>
         <Button
           color="secondary"
@@ -79,6 +96,7 @@ export default function SimpleCard(props) {
           Delete
         </Button>
       </CardActions>
+      <div>{props.post.likes}</div>
     </Card>
   );
 }

@@ -40,6 +40,7 @@ function Home(props) {
             description: doc.data().text,
             duration: doc.data().read_time,
             user: doc.data().userId,
+            likes: doc.data().likes,
           }))
         );
       });

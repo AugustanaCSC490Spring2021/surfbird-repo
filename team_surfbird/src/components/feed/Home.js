@@ -45,6 +45,13 @@ function Home(props) {
       });
   }, []);
 
+
+  const section = {
+    height: "100%",
+    paddingTop: 5,
+    backgroundColor: "#fff"
+  };
+
   const addPost = (event) => {
     event.preventDefault();
 
@@ -76,12 +83,18 @@ function Home(props) {
   return (
     <div className="Home">
       <Grid container justify="center" alignItems="center">
-        <Grid item>
+        <Grid item xs>
           <h1 style={{ marginTop: "15vh" }}>*App Name Here*</h1>
         </Grid>
-      </Grid>
-
-      <FormControl>
+        <Grid item xs>
+          <div style={section}>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <FormControl>
         <InputLabel>Post Title</InputLabel>
         <Input
           value={title}
@@ -108,12 +121,18 @@ function Home(props) {
       <Button color="primary" disabled={!title} type="submit" onClick={addPost}>
         Add Post
       </Button>
-
-      <ul>
+          <ul>
         {posts.map((post) => (
           <Post post={post} />
         ))}
       </ul>
+          </div>
+        </Grid>
+        <Grid item xs><h1>Test</h1></Grid>
+      </Grid>
+
+     
+      
     </div>
   );
 }

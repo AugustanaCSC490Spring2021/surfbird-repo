@@ -3,11 +3,11 @@ import { Tab, Tabs, AppBar } from "@material-ui/core";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import { logOut } from "./../../firebase";
 
-import Profile from "./../../../../team_surfbird/src/components/profile/profile.js";
+import Profile from "../profile/profile";
 import Home from "../../../src/components/feed/Home";
 
 export default function NavBar() {
-  const routes = ["/Home", "/OtherPage"];
+  const routes = ["/Home", "/Profile"];
 
   return (
     <div className="NavBar">

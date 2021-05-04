@@ -80,6 +80,12 @@ class Signup extends Component {
           .catch((error) => {
             console.log(error);
           });
+
+          console.log(firebaseApp.auth().currentUser);
+
+          localStorage.setItem("firstName", this.state.firstName);
+          localStorage.setItem("lastName", this.state.lastName);
+          
       }
   
     render() {

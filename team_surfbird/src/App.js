@@ -16,6 +16,7 @@ class App extends Component {
 
   componentDidMount() {
     this.authListener();
+    
   }
 
   authListener() {
@@ -24,6 +25,11 @@ class App extends Component {
       if (user) {
         this.setState({ user });
         localStorage.setItem("user", user.uid);
+        firebaseApp.firestore().collection("profile").add({
+          userId: localStorage.getItem("user"),
+          firstN: localStorage.getItem("firstName"),
+          lastN: localStorage.getItem("lastName")
+        });
       } else {
         this.setState({ user: null });
         localStorage.removeItem("user");

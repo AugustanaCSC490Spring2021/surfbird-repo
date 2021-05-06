@@ -40,7 +40,6 @@ export default function SimpleCard(props) {
 
   return (
     <Card className={classes.root}>
-      <CardHeader>test {props.post.user}</CardHeader>
       <CardContent>
         <Typography
           className={classes.title}

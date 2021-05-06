@@ -16,7 +16,7 @@ import firebase from "firebase";
 import NavBar from "../nav/NavBar";
 
 function Home(props) {
-  const [todos, setTodos] = useState([]);
+  const [likes, setLikes] = useState([]);
   const [input, setInput] = useState("");
   const [time, setTime] = useState("");
 
@@ -40,6 +40,7 @@ function Home(props) {
             description: doc.data().text,
             duration: doc.data().read_time,
             user: doc.data().userId,
+            likes: doc.data().likes,
           }))
         );
       });
@@ -66,11 +67,12 @@ function Home(props) {
         .get()
     );
 
-    setPosts([...posts, title, description, duration]);
+    setPosts([...posts, title, description, duration, likes]);
     setInput("");
     setTitle("");
     setDescription("");
     setDuration("");
+    setLikes([]);
   };
 
   return (

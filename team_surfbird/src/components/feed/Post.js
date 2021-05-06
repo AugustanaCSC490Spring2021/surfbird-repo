@@ -95,7 +95,7 @@ export default function SimpleCard(props) {
           Delete
         </Button>
       </CardActions>
-      <div>{props.post.likes}</div>
+      <div>Likes:{props.post.likes.length}</div>
     </Card>
   );
 }

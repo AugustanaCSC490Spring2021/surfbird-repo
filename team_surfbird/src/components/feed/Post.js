@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import db from "./../../firebase";
 import DeleteIcon from "@material-ui/icons/Delete";
-
+import firebase from "firebase/app";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -61,7 +61,7 @@ export default function SimpleCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-      <Button
+        <Button
           onClick={(event) =>
             db
               .collection("posts")
@@ -79,7 +79,6 @@ export default function SimpleCard(props) {
         >
           Like
         </Button>
-
         <Button>Comment</Button>
         <Button
           color="secondary"
@@ -99,6 +98,7 @@ export default function SimpleCard(props) {
           Delete
         </Button>
       </CardActions>
+      <div>Likes:{props.post.likes.length}</div>
     </Card>
   );
 }

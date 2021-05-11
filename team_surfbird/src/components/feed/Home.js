@@ -33,6 +33,7 @@ function Home(props) {
   const [user, setUser] = useState("");
   const [description, setDescription] = useState("");
   const [duration, setDuration] = useState("");
+  const [uname, setUname] = useState("");
 
   const [open, setOpen] = React.useState(false);
 
@@ -59,6 +60,7 @@ function Home(props) {
             description: doc.data().text,
             duration: doc.data().read_time,
             user: doc.data().userId,
+            uname: doc.data().username
           }))
         );
       });

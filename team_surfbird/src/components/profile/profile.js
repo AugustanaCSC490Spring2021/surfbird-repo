@@ -29,6 +29,7 @@ function Home(props) {
   useEffect(() => {
     console.log(localStorage.getItem("user"));
     db.collection("posts")
+      .where("userId", "==", localStorage.getItem("user"))
       .orderBy("timestamp", "asc")
       .onSnapshot((snapshot) => {
         console.log("firebase result");

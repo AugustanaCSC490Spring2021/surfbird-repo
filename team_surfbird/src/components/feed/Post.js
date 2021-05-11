@@ -18,6 +18,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import firebase from "firebase/app";
 
+const data = "";
 
 const useStyles = makeStyles({
   root: {
@@ -48,7 +49,7 @@ export default function SimpleCard(props) {
           color="textSecondary"
           gutterBottom
         >
-          Username Eventually: {props.post.user}
+          username
         </Typography>
 
         <Typography variant="h5" component="h2">

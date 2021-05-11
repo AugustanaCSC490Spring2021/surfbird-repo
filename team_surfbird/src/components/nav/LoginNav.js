@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import { logOut } from "./../../firebase";
 
 import Login from "./../../../../team_surfbird/src/components/login/Login.js";
-import SignUp from "../../../src/components/login/SignUp.js";
+import SignUp from "../../../src/components/login/Signup.js";
 
 export default function NavBar() {
   const routes = ["/Login", "/SignUp"];

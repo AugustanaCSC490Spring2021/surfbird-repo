@@ -60,11 +60,7 @@ function Home(props) {
             description: doc.data().text,
             duration: doc.data().read_time,
             user: doc.data().userId,
-<<<<<<< HEAD
-            uname: doc.data().username
-=======
             likes: doc.data().likes,
->>>>>>> d7a76f0b2bb14d0168ffbdf01aca7d56d9720e81
           }))
         );
       });

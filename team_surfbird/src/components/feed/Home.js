@@ -14,17 +14,16 @@ import db from "../../firebase";
 import { firebaseApp, logOut } from "../../firebase";
 import firebase from "firebase";
 import NavBar from "../nav/NavBar";
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import InputAdornment from '@material-ui/core/InputAdornment';
-
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 function Home(props) {
-  const [todos, setTodos] = useState([]);
+  const [likes, setLikes] = useState([]);
   const [input, setInput] = useState("");
   const [time, setTime] = useState("");
 
@@ -38,13 +37,14 @@ function Home(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
+    console.log("props:");
+    console.log(props);
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
   };
-
 
   useEffect(() => {
     console.log(localStorage.getItem("user"));
@@ -66,11 +66,10 @@ function Home(props) {
       });
   }, []);
 
-
   const section = {
     height: "100%",
     paddingTop: 5,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
   };
 
   const addPost = (event) => {
@@ -82,7 +81,7 @@ function Home(props) {
       read_time: duration,
       userId: localStorage.getItem("user"),
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      likes: [],
+      likes: likes,
       comments: [],
     });
 
@@ -94,96 +93,100 @@ function Home(props) {
         .get()
     );
 
-    setPosts([...posts, title, description, duration]);
+    setPosts([...posts, title, description, duration, likes]);
     setInput("");
     setTitle("");
+    setLikes([]);
     setDescription("");
     setDuration("");
     setOpen(false);
+    //Refresh page
+    window.location.reload(false);
   };
 
   return (
     <div className="Home">
       <Grid container justify="center" alignItems="center">
         <Grid item xs>
-          <h1 style={{ marginTop: "15vh" }}>*App Name Here*</h1>
-        </Grid>
-        <Grid item xs>
           <div style={section}>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Add Post
-      </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Add a New Post</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Post Your Current Activity
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Post Title"
-            type="email"
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-            fullWidth
-          />
-          
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            multiline
-            rowsMax={4}
-            label="Description"
-            type="email"
-            value={description}
-            onChange={(event) => setDescription(event.target.value)}
-            fullWidth
-          />
-           <TextField
-            autoFocus
-            margin="dense"
-            id="standard-number"
-            label="Duration"
-            type="number"
-            value={duration}
-            onChange={(event) => setDuration(event.target.value)}
-            endAdornment={<InputAdornment position="end">minutes</InputAdornment>}
-            fullWidth
-            
-          />
-         
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={addPost} color="primary">
-            Post
-          </Button>
-        </DialogActions>
-      </Dialog>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={handleClickOpen}
+            >
+              Add Post
+            </Button>
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">Add a New Post</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Post Your Current Activity
+                </DialogContentText>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="name"
+                  label="Post Title"
+                  type="email"
+                  value={title}
+                  onChange={(event) => setTitle(event.target.value)}
+                  fullWidth
+                />
 
-          <ul>
-        {posts.map((post) => (
-          <Post post={post} />
-        ))}
-      </ul>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="name"
+                  multiline
+                  rowsMax={4}
+                  label="Description"
+                  type="email"
+                  value={description}
+                  onChange={(event) => setDescription(event.target.value)}
+                  fullWidth
+                />
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="standard-number"
+                  label="Duration"
+                  type="number"
+                  value={duration}
+                  onChange={(event) => setDuration(event.target.value)}
+                  endAdornment={
+                    <InputAdornment position="end">minutes</InputAdornment>
+                  }
+                  fullWidth
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                  Cancel
+                </Button>
+                <Button onClick={addPost} color="primary">
+                  Post
+                </Button>
+              </DialogActions>
+            </Dialog>
+
+            <ul>
+              {posts.map((post) => (
+                <Post post={post} />
+              ))}
+            </ul>
           </div>
         </Grid>
-        <Grid item xs><h1>Test</h1></Grid>
       </Grid>
-
-     
-      
     </div>
   );
 }

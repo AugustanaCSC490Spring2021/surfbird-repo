@@ -17,7 +17,6 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 
-
 const data = "";
 
 const useStyles = makeStyles({
@@ -40,6 +39,8 @@ const useStyles = makeStyles({
 export default function SimpleCard(props) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
+  console.log("PROPS!!!!");
+  console.log(props.post.likes);
 
   return (
     <Card className={classes.root}>
@@ -71,7 +72,6 @@ export default function SimpleCard(props) {
                   likes: firebase.firestore.FieldValue.arrayUnion(
                     localStorage.getItem("user")
                   ),
-                  likesCount: Number(props.post.likesCount + 1),
                 },
                 { merge: true }
               )
@@ -98,7 +98,7 @@ export default function SimpleCard(props) {
           Delete
         </Button>
       </CardActions>
-      <div>Likes:{props.post.likes.length}</div>
+      <div>Likes: {props.post.likes.length}</div>
     </Card>
   );
 }

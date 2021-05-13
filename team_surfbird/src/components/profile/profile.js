@@ -19,9 +19,12 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import Fab from "@material-ui/core/Fab";
+import EditIcon from "@material-ui/icons/Edit";
 
 function Profile(props) {
   const [likes, setLikes] = useState([]);
+  const [comments, setComments] = useState([]);
   const [input, setInput] = useState("");
   const [time, setTime] = useState("");
 
@@ -35,8 +38,6 @@ function Profile(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    console.log("props:");
-    console.log(props);
     setOpen(true);
   };
 
@@ -44,11 +45,19 @@ function Profile(props) {
     setOpen(false);
   };
 
+  const style = {
+    margin: 0,
+    top: "auto",
+    right: 20,
+    bottom: 20,
+    left: "auto",
+    position: "fixed",
+  };
   useEffect(() => {
     console.log(localStorage.getItem("user"));
     db.collection("posts")
       .where("userId", "==", localStorage.getItem("user"))
-      .orderBy("timestamp", "asc")
+      .orderBy("timestamp")
       .onSnapshot((snapshot) => {
         console.log("firebase result");
         console.log(snapshot.docs);
@@ -60,6 +69,7 @@ function Profile(props) {
             duration: doc.data().read_time,
             user: doc.data().userId,
             likes: doc.data().likes,
+            comments: doc.data().comments,
           }))
         );
       });
@@ -81,7 +91,7 @@ function Profile(props) {
       userId: localStorage.getItem("user"),
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       likes: likes,
-      comments: [],
+      comments: comments,
     });
 
     console.log(localStorage.getItem("user"));
@@ -96,6 +106,7 @@ function Profile(props) {
     setInput("");
     setTitle("");
     setLikes([]);
+    setComments([]);
     setDescription("");
     setDuration("");
     setOpen(false);
@@ -105,8 +116,17 @@ function Profile(props) {
 
   return (
     <div className="Home">
-      <Grid container justify="center" alignItems="center">
-        <Grid item xs>
+      <Fab
+        onClick={handleClickOpen}
+        style={style}
+        color="secondary"
+        aria-label="edit"
+      >
+        <EditIcon />
+      </Fab>
+      <Grid container spacing={3}>
+        <Grid item xs></Grid>
+        <Grid item xs={6}>
           <div style={section}>
             <br></br>
             <br></br>
@@ -141,7 +161,6 @@ function Profile(props) {
                   onChange={(event) => setTitle(event.target.value)}
                   fullWidth
                 />
-
                 <TextField
                   autoFocus
                   margin="dense"
@@ -185,6 +204,7 @@ function Profile(props) {
             </ul>
           </div>
         </Grid>
+        <Grid item xs></Grid>
       </Grid>
     </div>
   );

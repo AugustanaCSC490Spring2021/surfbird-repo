@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   List,
   ListItem,
@@ -16,6 +16,14 @@ import CardActions from "@material-ui/core/CardActions";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 const data = "";
 
@@ -37,10 +45,21 @@ const useStyles = makeStyles({
 });
 
 export default function SimpleCard(props) {
+  const [comment, setComment] = useState("");
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   console.log("PROPS!!!!");
   console.log(props.post.likes);
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <Card className={classes.root}>
@@ -79,7 +98,57 @@ export default function SimpleCard(props) {
         >
           Like
         </Button>
-        <Button>Comment</Button>
+
+        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+          Comment
+        </Button>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">
+            Add a New Comment on this Post
+          </DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Comment"
+              type="email"
+              value={comment}
+              onChange={(event) => setComment(event.target.value)}
+              fullWidth
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button
+              onClick={(event) => {
+                event.preventDefault();
+                db.collection("posts")
+                  .doc(props.post.id)
+                  .update(
+                    {
+                      comments: firebase.firestore.FieldValue.arrayUnion({
+                        comment,
+                      }),
+                    },
+                    { merge: true }
+                  );
+                setComment("");
+                setOpen(false);
+              }}
+              color="primary"
+            >
+              Post
+            </Button>
+          </DialogActions>
+        </Dialog>
+
         <Button
           color="secondary"
           disabled={
@@ -99,6 +168,14 @@ export default function SimpleCard(props) {
         </Button>
       </CardActions>
       <div>Likes: {props.post.likes.length}</div>
+      <div>
+        Comments: {props.post.comments.length}
+        <ul>
+          {props.post.comments.map((c) => (
+            <li>{c.comment}</li>
+          ))}
+        </ul>
+      </div>
     </Card>
   );
 }

@@ -24,6 +24,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 
 function Home(props) {
   const [likes, setLikes] = useState([]);
+  const [comments, setComments] = useState([]);
   const [input, setInput] = useState("");
   const [time, setTime] = useState("");
 
@@ -59,6 +60,7 @@ function Home(props) {
             duration: doc.data().read_time,
             user: doc.data().userId,
             likes: doc.data().likes,
+            comments: doc.data().comments,
           }))
         );
       });
@@ -80,7 +82,7 @@ function Home(props) {
       userId: localStorage.getItem("user"),
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       likes: likes,
-      comments: [],
+      comments: comments,
     });
 
     console.log(localStorage.getItem("user"));
@@ -95,6 +97,7 @@ function Home(props) {
     setInput("");
     setTitle("");
     setLikes([]);
+    setComments([]);
     setDescription("");
     setDuration("");
     setOpen(false);

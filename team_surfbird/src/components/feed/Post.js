@@ -61,6 +61,30 @@ export default function SimpleCard(props) {
     setOpen(false);
   };
 
+  let button;
+  let isLoggedIn;
+  isLoggedIn = true;
+
+  if(isLoggedIn){
+    button = <Button
+    onClick={(event) =>
+      db
+        .collection("posts")
+        .doc(props.post.id)
+        .update(
+          {
+            likes: firebase.firestore.FieldValue.arrayUnion(
+              localStorage.getItem("user")
+            ),
+          },
+          { merge: true }
+        )
+    }
+  >
+    Like ({props.post.likes.length})
+  </Button>
+  }
+
   return (
     <Card className={classes.root}>
       <CardContent>
@@ -81,6 +105,7 @@ export default function SimpleCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
+        { button }
         <Button
           onClick={(event) =>
             db
@@ -88,7 +113,7 @@ export default function SimpleCard(props) {
               .doc(props.post.id)
               .update(
                 {
-                  likes: firebase.firestore.FieldValue.arrayUnion(
+                  likes: firebase.firestore.FieldValue.arrayRemove(
                     localStorage.getItem("user")
                   ),
                 },
@@ -96,7 +121,7 @@ export default function SimpleCard(props) {
               )
           }
         >
-          Like
+          Unlike ({props.post.likes.length})
         </Button>
 
         <Button variant="outlined" color="primary" onClick={handleClickOpen}>
@@ -167,7 +192,6 @@ export default function SimpleCard(props) {
           Delete
         </Button>
       </CardActions>
-      <div>Likes: {props.post.likes.length}</div>
       <div>
         Comments: {props.post.comments.length}
         <ul>

@@ -24,6 +24,10 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import Collapse from '@material-ui/core/Collapse';
+import IconButton from '@material-ui/core/IconButton';
+import CommentIcon from '@material-ui/icons/Comment';
+import clsx from 'clsx';
 
 const data = "";
 
@@ -52,6 +56,7 @@ export default function SimpleCard(props) {
   console.log(props.post.likes);
 
   const [open, setOpen] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -59,6 +64,10 @@ export default function SimpleCard(props) {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
   };
 
   let button;
@@ -130,7 +139,54 @@ export default function SimpleCard(props) {
           Unlike ({props.post.likes.length})
         </Button>
 
-        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+        <IconButton
+          className={clsx(classes.expand, {
+            [classes.expandOpen]: expanded,
+          })}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <CommentIcon />
+        </IconButton>
+
+        <Button
+          color="secondary"
+          disabled={
+            localStorage.getItem("user") === props.post.user ? false : true
+          }
+          visibility={
+            localStorage.getItem("user") === props.post.user
+              ? "hidden"
+              : "hidden"
+          }
+          fontSize="small"
+          onClick={(event) =>
+            db.collection("posts").doc(props.post.id).delete()
+          }
+        >
+          Delete
+        </Button>
+
+
+      </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+          <div>
+        Comments: {props.post.comments.length}
+        <ul>
+          {props.post.comments.map((c) => (
+            <li>
+              {c.comment}
+              <div>
+                ----------------------------------------------------------------------
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+          <Button variant="outlined" color="primary" onClick={handleClickOpen}>
           Comment
         </Button>
         <Dialog
@@ -182,37 +238,9 @@ export default function SimpleCard(props) {
           </DialogActions>
         </Dialog>
 
-        <Button
-          color="secondary"
-          disabled={
-            localStorage.getItem("user") === props.post.user ? false : true
-          }
-          visibility={
-            localStorage.getItem("user") === props.post.user
-              ? "hidden"
-              : "hidden"
-          }
-          fontSize="small"
-          onClick={(event) =>
-            db.collection("posts").doc(props.post.id).delete()
-          }
-        >
-          Delete
-        </Button>
-      </CardActions>
-      <div>
-        Comments: {props.post.comments.length}
-        <ul>
-          {props.post.comments.map((c) => (
-            <li>
-              {c.comment}
-              <div>
-                ----------------------------------------------------------------------
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+        
+        </CardContent>
+      </Collapse>
     </Card>
   );
 }

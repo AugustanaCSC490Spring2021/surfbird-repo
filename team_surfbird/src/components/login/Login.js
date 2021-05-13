@@ -73,6 +73,15 @@ class Login extends Component {
                 <Avatar className={classes.avatar}>
                 <LockOutlinedIcon />
                 </Avatar>
+                <Typography component="h1" variant="h4">
+                Welcome to Surfbird
+                </Typography>
+                <br/>
+                <Typography component="h2" variant="body1" align="center">
+                The app that allows you to connect with friends and share your progress on books, movies, and more!
+                </Typography>
+                <br/>
+
                 <Typography component="h1" variant="h5">
                 Log In
                 </Typography>

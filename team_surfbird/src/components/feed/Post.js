@@ -73,11 +73,15 @@ export default function SimpleCard(props) {
         </Typography>
 
         <Typography variant="h5" component="h2">
-          Media: {props.post.title}
+          {props.post.title}
         </Typography>
-
+        <br></br>
         <Typography variant="body2" component="p">
-          {props.post.description}
+          Description: {props.post.description}
+        </Typography>
+        <br></br>
+        <Typography variant="body1" component="p">
+          Rating: {props.post.rating}
         </Typography>
       </CardContent>
       <CardActions>

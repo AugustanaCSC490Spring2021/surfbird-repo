@@ -177,7 +177,7 @@ function Profile(props) {
                   autoFocus
                   margin="dense"
                   id="standard-number"
-                  label="Duration"
+                  label="Rating (out of 10)"
                   type="number"
                   value={duration}
                   onChange={(event) => setDuration(event.target.value)}

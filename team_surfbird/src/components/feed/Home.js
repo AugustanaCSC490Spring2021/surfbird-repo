@@ -20,8 +20,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import Fab from '@material-ui/core/Fab';
-import EditIcon from '@material-ui/icons/Edit';
+import Fab from "@material-ui/core/Fab";
+import EditIcon from "@material-ui/icons/Edit";
 
 function Home(props) {
   const [likes, setLikes] = useState([]);
@@ -33,7 +33,7 @@ function Home(props) {
   const [title, setTitle] = useState("");
   const [user, setUser] = useState("");
   const [description, setDescription] = useState("");
-  const [duration, setDuration] = useState("");
+  const [rating, setRating] = useState("");
   const [uname, setUname] = useState("");
 
   const [open, setOpen] = React.useState(false);
@@ -48,12 +48,12 @@ function Home(props) {
 
   const style = {
     margin: 0,
-    top: 'auto',
+    top: "auto",
     right: 20,
     bottom: 20,
-    left: 'auto',
-    position: 'fixed',
-};
+    left: "auto",
+    position: "fixed",
+  };
   useEffect(() => {
     console.log(localStorage.getItem("user"));
     db.collection("posts")
@@ -66,7 +66,7 @@ function Home(props) {
             id: doc.id,
             title: doc.data().post_title,
             description: doc.data().text,
-            duration: doc.data().read_time,
+            rating: doc.data().read_time,
             user: doc.data().userId,
             likes: doc.data().likes,
             comments: doc.data().comments,
@@ -87,7 +87,7 @@ function Home(props) {
     db.collection("posts").add({
       post_title: title,
       text: description,
-      read_time: duration,
+      read_time: rating,
       userId: localStorage.getItem("user"),
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       likes: likes,
@@ -102,13 +102,13 @@ function Home(props) {
         .get()
     );
 
-    setPosts([...posts, title, description, duration, likes]);
+    setPosts([...posts, title, description, rating, likes]);
     setInput("");
     setTitle("");
     setLikes([]);
     setComments([]);
     setDescription("");
-    setDuration("");
+    setRating("");
     setOpen(false);
     //Refresh page
     window.location.reload(false);
@@ -116,12 +116,17 @@ function Home(props) {
 
   return (
     <div className="Home">
-      <Fab onClick={handleClickOpen} style={style} color="secondary" aria-label="edit">
+      <Fab
+        onClick={handleClickOpen}
+        style={style}
+        color="secondary"
+        aria-label="edit"
+      >
         <EditIcon />
       </Fab>
       <Grid container spacing={3}>
         <Grid item xs></Grid>
-        <Grid item xs={6} >
+        <Grid item xs={6}>
           <div style={section}>
             <br></br>
             <br></br>
@@ -172,10 +177,10 @@ function Home(props) {
                   autoFocus
                   margin="dense"
                   id="standard-number"
-                  label="Duration"
+                  label="Rating (out of 10)"
                   type="number"
-                  value={duration}
-                  onChange={(event) => setDuration(event.target.value)}
+                  value={rating}
+                  onChange={(event) => setRating(event.target.value)}
                   endAdornment={
                     <InputAdornment position="end">minutes</InputAdornment>
                   }
@@ -191,7 +196,7 @@ function Home(props) {
                 </Button>
               </DialogActions>
             </Dialog>
-                  
+
             <ul>
               {posts.map((post) => (
                 <Post post={post} />

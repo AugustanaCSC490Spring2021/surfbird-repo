@@ -8,7 +8,6 @@ import {
   GridList,
   Grid,
 } from "@material-ui/core";
-import Todo from "../../Todo.js";
 import Post from "./Post";
 import db from "../../firebase";
 import { firebaseApp, logOut } from "../../firebase";

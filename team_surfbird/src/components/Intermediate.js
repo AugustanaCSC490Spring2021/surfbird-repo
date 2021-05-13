@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import NavBar from "../../../team_surfbird/src/components/nav/NavBar";
 
 class Intermediate extends Component {

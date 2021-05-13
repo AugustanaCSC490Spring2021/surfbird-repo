@@ -1,7 +1,6 @@
 import React from "react";
 import { Tab, Tabs, AppBar } from "@material-ui/core";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
-import { logOut } from "./../../firebase";
 
 import Login from "./../../../../team_surfbird/src/components/login/Login.js";
 import SignUp from "../../../src/components/login/Signup.js";

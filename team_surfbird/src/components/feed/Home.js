@@ -37,8 +37,6 @@ function Home(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    console.log("props:");
-    console.log(props);
     setOpen(true);
   };
 
@@ -49,7 +47,7 @@ function Home(props) {
   useEffect(() => {
     console.log(localStorage.getItem("user"));
     db.collection("posts")
-      .orderBy("timestamp", "asc")
+      .orderBy("timestamp")
       .onSnapshot((snapshot) => {
         console.log("firebase result");
         console.log(snapshot.docs);

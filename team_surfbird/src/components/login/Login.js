@@ -51,7 +51,7 @@ class Login extends Component {
         this.setState({ [e.target.name]: e.target.value });
       }
       
-      login(e) {
+    login(e) {
         e.preventDefault();
         firebaseApp
           .auth()

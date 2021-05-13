@@ -8,7 +8,6 @@ import {
   GridList,
   Grid,
 } from "@material-ui/core";
-import Todo from "../../Todo.js";
 import Post from "./Post";
 import db from "../../firebase";
 import { firebaseApp, logOut } from "../../firebase";
@@ -21,6 +20,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import Fab from '@material-ui/core/Fab';
+import EditIcon from '@material-ui/icons/Edit';
 
 function Home(props) {
   const [likes, setLikes] = useState([]);
@@ -45,6 +46,14 @@ function Home(props) {
     setOpen(false);
   };
 
+  const style = {
+    margin: 0,
+    top: 'auto',
+    right: 20,
+    bottom: 20,
+    left: 'auto',
+    position: 'fixed',
+};
   useEffect(() => {
     console.log(localStorage.getItem("user"));
     db.collection("posts")
@@ -107,8 +116,12 @@ function Home(props) {
 
   return (
     <div className="Home">
-      <Grid container justify="center" alignItems="center">
-        <Grid item xs>
+      <Fab onClick={handleClickOpen} style={style} color="secondary" aria-label="edit">
+        <EditIcon />
+      </Fab>
+      <Grid container spacing={3}>
+        <Grid item xs></Grid>
+        <Grid item xs={6} >
           <div style={section}>
             <br></br>
             <br></br>
@@ -143,7 +156,6 @@ function Home(props) {
                   onChange={(event) => setTitle(event.target.value)}
                   fullWidth
                 />
-
                 <TextField
                   autoFocus
                   margin="dense"
@@ -179,7 +191,7 @@ function Home(props) {
                 </Button>
               </DialogActions>
             </Dialog>
-
+                  
             <ul>
               {posts.map((post) => (
                 <Post post={post} />
@@ -187,6 +199,7 @@ function Home(props) {
             </ul>
           </div>
         </Grid>
+        <Grid item xs></Grid>
       </Grid>
     </div>
   );

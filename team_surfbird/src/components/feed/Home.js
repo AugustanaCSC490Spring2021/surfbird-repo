@@ -178,6 +178,7 @@ function Home(props) {
                   margin="dense"
                   id="standard-number"
                   label="Rating (out of 10)"
+                  InputProps={{ inputProps: { min: 0, max: 10 } }}
                   type="number"
                   value={rating}
                   onChange={(event) => setRating(event.target.value)}

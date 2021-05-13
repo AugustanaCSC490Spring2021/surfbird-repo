@@ -118,7 +118,7 @@ function Home(props) {
       </Fab>
       <Grid container spacing={3}>
         <Grid item xs></Grid>
-        <Grid item xs>
+        <Grid item xs={6} >
           <div style={section}>
             <br></br>
             <br></br>

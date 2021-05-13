@@ -153,7 +153,6 @@ function Home(props) {
                   onChange={(event) => setTitle(event.target.value)}
                   fullWidth
                 />
-
                 <TextField
                   autoFocus
                   margin="dense"

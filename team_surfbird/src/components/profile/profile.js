@@ -27,7 +27,7 @@ function Profile(props) {
   const [comments, setComments] = useState([]);
   const [input, setInput] = useState("");
   const [time, setTime] = useState("");
-
+  const [rating, setRating] = useState("");
   const [posts, setPosts] = useState([]);
   const [title, setTitle] = useState("");
   const [user, setUser] = useState("");
@@ -66,7 +66,7 @@ function Profile(props) {
             id: doc.id,
             title: doc.data().post_title,
             description: doc.data().text,
-            duration: doc.data().read_time,
+            rating: doc.data().read_time,
             user: doc.data().userId,
             likes: doc.data().likes,
             comments: doc.data().comments,
@@ -87,7 +87,7 @@ function Profile(props) {
     db.collection("posts").add({
       post_title: title,
       text: description,
-      read_time: duration,
+      read_time: rating,
       userId: localStorage.getItem("user"),
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       likes: likes,
@@ -102,13 +102,14 @@ function Profile(props) {
         .get()
     );
 
-    setPosts([...posts, title, description, duration, likes]);
+    setPosts([...posts, title, description, rating, likes]);
     setInput("");
     setTitle("");
     setLikes([]);
     setComments([]);
     setDescription("");
     setDuration("");
+    setRating("");
     setOpen(false);
     //Refresh page
     window.location.reload(false);

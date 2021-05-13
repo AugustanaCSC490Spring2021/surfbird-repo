@@ -65,24 +65,26 @@ export default function SimpleCard(props) {
   let isLoggedIn;
   isLoggedIn = true;
 
-  if(isLoggedIn){
-    button = <Button
-    onClick={(event) =>
-      db
-        .collection("posts")
-        .doc(props.post.id)
-        .update(
-          {
-            likes: firebase.firestore.FieldValue.arrayUnion(
-              localStorage.getItem("user")
-            ),
-          },
-          { merge: true }
-        )
-    }
-  >
-    Like ({props.post.likes.length})
-  </Button>
+  if (isLoggedIn) {
+    button = (
+      <Button
+        onClick={(event) =>
+          db
+            .collection("posts")
+            .doc(props.post.id)
+            .update(
+              {
+                likes: firebase.firestore.FieldValue.arrayUnion(
+                  localStorage.getItem("user")
+                ),
+              },
+              { merge: true }
+            )
+        }
+      >
+        Like ({props.post.likes.length})
+      </Button>
+    );
   }
 
   return (
@@ -109,7 +111,7 @@ export default function SimpleCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        { button }
+        {button}
         <Button
           onClick={(event) =>
             db
@@ -200,7 +202,12 @@ export default function SimpleCard(props) {
         Comments: {props.post.comments.length}
         <ul>
           {props.post.comments.map((c) => (
-            <li>{c.comment}</li>
+            <li>
+              {c.comment}
+              <div>
+                ----------------------------------------------------------------------
+              </div>
+            </li>
           ))}
         </ul>
       </div>

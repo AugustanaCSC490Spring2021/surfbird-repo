@@ -145,7 +145,9 @@ export default function SimpleCard(props) {
               margin="dense"
               id="name"
               label="Comment"
+              multiline
               type="email"
+              rowsMax={4}
               value={comment}
               onChange={(event) => setComment(event.target.value)}
               fullWidth

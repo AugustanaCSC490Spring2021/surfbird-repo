@@ -58,7 +58,7 @@ function Home(props) {
   useEffect(() => {
     console.log(localStorage.getItem("user"));
     db.collection("posts")
-      .orderBy("timestamp")
+      .orderBy("timestamp", "desc")
       .onSnapshot((snapshot) => {
         console.log("firebase result");
         console.log(snapshot.docs);

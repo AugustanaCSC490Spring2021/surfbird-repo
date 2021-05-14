@@ -29,6 +29,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CommentIcon from '@material-ui/icons/Comment';
 import clsx from 'clsx';
 import Divider from '@material-ui/core/Divider';
+import Badge from '@material-ui/core/Badge';
 
 const data = "";
 
@@ -148,8 +149,9 @@ export default function SimpleCard(props) {
           aria-expanded={expanded}
           aria-label="show more"
         >
-          <CommentIcon />
-          {props.post.comments.length}
+          <Badge badgeContent={props.post.comments.length} color="secondary">
+            <CommentIcon />
+          </Badge>
         </IconButton>
 
         <Button
@@ -178,15 +180,7 @@ export default function SimpleCard(props) {
         Comments: {props.post.comments.length}
         <ul>
           {props.post.comments.map((c) => (
-            // <li style={{listSyleType: "none"}}>
-            //   <br/>
-            //   {c.comment}
-            //   <Divider variant="middle" />
-            //   {/* <div>
-            //     ----------------------------------------------------------------------
-            //   </div> */}
-            //   <br/>
-            // </li>
+
             <ListItem alignItems="flex-start">
               <ListItemText>
               <Typography

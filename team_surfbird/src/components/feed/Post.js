@@ -43,7 +43,7 @@ const data = "";
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
-    margin: 10
+    margin: 10,
 
   },
   bullet: {
@@ -59,7 +59,7 @@ const useStyles = makeStyles({
   },
   topBox:{
       display: "flex",
-      justifycontent: "space-between"
+      justifyContent: "space-between"
   }
 });
 
@@ -115,22 +115,19 @@ export default function SimpleCard(props) {
 
   return (
     <Card className={classes.root}>
-      
-      <CardContent>
-        <topBox>
-        <Typography
+      <topBox>
+      <Typography
           display="inline"
           align="left"
           className={classes.title}
           color="textSecondary"
           gutterBottom
         >
-          username
+        {props.post.user} @ {props.post.timestamp}
         </Typography>
-        <Typography display="inline" align="right" variant="body1" component="p">
-          {props.post.timestamp}
-        </Typography>
-        </topBox>
+      </topBox>
+      <CardContent>
+        
         <Typography variant="h5" component="h2">
           {props.post.title}
         </Typography>

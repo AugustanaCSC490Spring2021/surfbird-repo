@@ -176,23 +176,28 @@ export default function SimpleCard(props) {
           </Badge>
         </IconButton>
 
+        {localStorage.getItem("user") == props.post.user ? (
         <Button
-          color="secondary"
-          disabled={
-            localStorage.getItem("user") === props.post.user ? false : true
-          }
-          visibility={
-            localStorage.getItem("user") === props.post.user
-              ? "hidden"
-              : "hidden"
-          }
-          fontSize="small"
-          onClick={(event) =>
-            db.collection("posts").doc(props.post.id).delete()
-          }
-        >
-          Delete
-        </Button>
+        color="secondary"
+        disabled={
+          localStorage.getItem("user") === props.post.user ? false : true
+        }
+        visibility={
+          localStorage.getItem("user") === props.post.user
+            ? "hidden"
+            : "hidden"
+        }
+        fontSize="small"
+        onClick={(event) =>
+          db.collection("posts").doc(props.post.id).delete()
+        }
+      >
+        Delete
+      </Button>
+      ) : (
+        <div></div>
+      )}
+        
 
        
       </CardActions>

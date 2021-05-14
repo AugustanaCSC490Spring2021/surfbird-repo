@@ -91,7 +91,7 @@ function Home(props) {
       text: description,
       read_time: rating,
       userId: localStorage.getItem("user"),
-      timestamp: timestamp,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       likes: likes,
       comments: comments,
     });

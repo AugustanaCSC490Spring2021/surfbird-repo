@@ -28,6 +28,7 @@ import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import CommentIcon from '@material-ui/icons/Comment';
 import clsx from 'clsx';
+import Divider from '@material-ui/core/Divider';
 
 const data = "";
 
@@ -174,14 +175,56 @@ export default function SimpleCard(props) {
         <CardContent>
           <div>
         Comments: {props.post.comments.length}
+
+        {/* <ListItem alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+        </ListItemAvatar>
+        <ListItemText
+          primary="Brunch this weekend?"
+          secondary={
+            <React.Fragment>
+              <Typography
+                component="span"
+                variant="body2"
+                className={classes.inline}
+                color="textPrimary"
+              >
+                Ali Connors
+              </Typography>
+              {" — I'll be in your neighborhood doing errands this…"}
+            </React.Fragment>
+          }
+        />
+      </ListItem>
+      <Divider variant="inset" component="li" /> */}
         <ul>
           {props.post.comments.map((c) => (
-            <li>
-              {c.comment}
-              <div>
-                ----------------------------------------------------------------------
-              </div>
-            </li>
+            // <li style={{listSyleType: "none"}}>
+            //   <br/>
+            //   {c.comment}
+            //   <Divider variant="middle" />
+            //   {/* <div>
+            //     ----------------------------------------------------------------------
+            //   </div> */}
+            //   <br/>
+            // </li>
+            <ListItem alignItems="flex-start">
+              <ListItemText>
+              <Typography
+                component="span"
+                variant="body2"
+                className={classes.inline}
+                color="textPrimary"
+              >
+                {c.comment}
+              </Typography>
+                    
+              </ListItemText>
+              <Divider variant="inset" component="li" />
+
+            </ListItem>
+            
           ))}
         </ul>
       </div>

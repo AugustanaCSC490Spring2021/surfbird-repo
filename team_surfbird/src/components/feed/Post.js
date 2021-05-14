@@ -30,6 +30,12 @@ import CommentIcon from '@material-ui/icons/Comment';
 import clsx from 'clsx';
 import Divider from '@material-ui/core/Divider';
 import Badge from '@material-ui/core/Badge';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Favorite from '@material-ui/icons/Favorite';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+
 
 const data = "";
 
@@ -71,6 +77,8 @@ export default function SimpleCard(props) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+
 
   let button;
   let isLoggedIn;
@@ -193,7 +201,17 @@ export default function SimpleCard(props) {
               </Typography>
                     
               </ListItemText>
-              <Divider variant="inset" component="li" />
+              <ListItemSecondaryAction>
+              
+                <FormControlLabel
+                control={<Checkbox 
+                icon={<FavoriteBorder />} 
+                checkedIcon={<Favorite />} 
+                name="checked" />}
+              />
+            </ListItemSecondaryAction>
+
+              <Divider variant="inset" />
 
             </ListItem>
             

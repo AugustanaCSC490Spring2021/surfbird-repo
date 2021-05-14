@@ -73,7 +73,7 @@ class Login extends Component {
                 <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h4">
-                Welcome to Surfbird
+                Welcome to Quire
                 </Typography>
                 <br/>
                 <Typography component="h2" variant="body1" align="center">

@@ -35,6 +35,7 @@ function Home(props) {
   const [description, setDescription] = useState("");
   const [rating, setRating] = useState("");
   const [uname, setUname] = useState("");
+  const[timestamp, setTimeStamp] = useState("");
 
   const [open, setOpen] = React.useState(false);
 
@@ -70,6 +71,7 @@ function Home(props) {
             user: doc.data().userId,
             likes: doc.data().likes,
             comments: doc.data().comments,
+            timestamp: new Date(doc.data().timestamp.toDate()).toLocaleDateString() + " " + new Date(doc.data().timestamp.toDate()).toLocaleTimeString()
           }))
         );
       });
@@ -89,7 +91,7 @@ function Home(props) {
       text: description,
       read_time: rating,
       userId: localStorage.getItem("user"),
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      timestamp: timestamp,
       likes: likes,
       comments: comments,
     });
@@ -102,7 +104,7 @@ function Home(props) {
         .get()
     );
 
-    setPosts([...posts, title, description, rating, likes]);
+    setPosts([...posts, title, description, rating, likes, timestamp]);
     setInput("");
     setTitle("");
     setLikes([]);
@@ -110,6 +112,7 @@ function Home(props) {
     setDescription("");
     setRating("");
     setOpen(false);
+    setTimeStamp("");
     //Refresh page
     window.location.reload(false);
   };

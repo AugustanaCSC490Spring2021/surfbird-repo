@@ -24,12 +24,12 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
-import CommentIcon from '@material-ui/icons/Comment';
-import clsx from 'clsx';
-import Divider from '@material-ui/core/Divider';
-import Badge from '@material-ui/core/Badge';
+import Collapse from "@material-ui/core/Collapse";
+import IconButton from "@material-ui/core/IconButton";
+import CommentIcon from "@material-ui/icons/Comment";
+import clsx from "clsx";
+import Divider from "@material-ui/core/Divider";
+import Badge from "@material-ui/core/Badge";
 
 const data = "";
 
@@ -105,8 +105,9 @@ export default function SimpleCard(props) {
           className={classes.title}
           color="textSecondary"
           gutterBottom
+          fontSize="1px"
         >
-          username
+          {props.post.user}
         </Typography>
 
         <Typography variant="h5" component="h2">
@@ -171,89 +172,81 @@ export default function SimpleCard(props) {
         >
           Delete
         </Button>
-
-
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <div>
-        Comments: {props.post.comments.length}
-        <ul>
-          {props.post.comments.map((c) => (
-
-            <ListItem alignItems="flex-start">
-              <ListItemText>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                {c.comment}
-              </Typography>
-                    
-              </ListItemText>
-              <Divider variant="inset" component="li" />
-
-            </ListItem>
-            
-          ))}
-        </ul>
-      </div>
+            Comments: {props.post.comments.length}
+            <ul>
+              {props.post.comments.map((c) => (
+                <ListItem alignItems="flex-start">
+                  <ListItemText>
+                    <Typography
+                      component="span"
+                      variant="body2"
+                      className={classes.inline}
+                      color="textPrimary"
+                    >
+                      {c.comment}
+                    </Typography>
+                  </ListItemText>
+                  <Divider variant="inset" component="li" />
+                </ListItem>
+              ))}
+            </ul>
+          </div>
 
           <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-          Comment
-        </Button>
-        <Dialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle id="form-dialog-title">
-            Add a New Comment on this Post
-          </DialogTitle>
-          <DialogContent>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Comment"
-              multiline
-              type="email"
-              rowsMax={4}
-              value={comment}
-              onChange={(event) => setComment(event.target.value)}
-              fullWidth
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button
-              onClick={(event) => {
-                event.preventDefault();
-                db.collection("posts")
-                  .doc(props.post.id)
-                  .update(
-                    {
-                      comments: firebase.firestore.FieldValue.arrayUnion({
-                        comment,
-                      }),
-                    },
-                    { merge: true }
-                  );
-                setComment("");
-                setOpen(false);
-              }}
-              color="primary"
-            >
-              Post
-            </Button>
-          </DialogActions>
-        </Dialog>
-
-        
+            Comment
+          </Button>
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="form-dialog-title"
+          >
+            <DialogTitle id="form-dialog-title">
+              Add a New Comment on this Post
+            </DialogTitle>
+            <DialogContent>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Comment"
+                multiline
+                type="email"
+                rowsMax={4}
+                value={comment}
+                onChange={(event) => setComment(event.target.value)}
+                fullWidth
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button
+                onClick={(event) => {
+                  event.preventDefault();
+                  db.collection("posts")
+                    .doc(props.post.id)
+                    .update(
+                      {
+                        comments: firebase.firestore.FieldValue.arrayUnion({
+                          comment,
+                        }),
+                      },
+                      { merge: true }
+                    );
+                  setComment("");
+                  setOpen(false);
+                }}
+                color="primary"
+              >
+                Post
+              </Button>
+            </DialogActions>
+          </Dialog>
         </CardContent>
       </Collapse>
     </Card>

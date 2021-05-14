@@ -149,6 +149,7 @@ export default function SimpleCard(props) {
           aria-label="show more"
         >
           <CommentIcon />
+          {props.post.comments.length}
         </IconButton>
 
         <Button

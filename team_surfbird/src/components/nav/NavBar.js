@@ -5,6 +5,9 @@ import { logOut } from "./../../firebase";
 
 import Profile from "../profile/profile";
 import Home from "../../../src/components/feed/Home";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import logo from "./home-entertainment-system.png"
 
 export default function NavBar() {
   const routes = ["/Home", "/Profile"];
@@ -14,7 +17,10 @@ export default function NavBar() {
       <BrowserRouter>
         <Route path="/">
           <AppBar>
+           
+            
             <Tabs>
+            <img margin="5" width="100" src={logo} alt="BigCo Inc. logo"/>
               <Tab
                 label="Home"
                 value={routes[0]}

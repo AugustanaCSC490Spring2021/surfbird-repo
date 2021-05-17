@@ -57,7 +57,7 @@ function Profile(props) {
     console.log(localStorage.getItem("user"));
     db.collection("posts")
       .where("userId", "==", localStorage.getItem("user"))
-      .orderBy("timestamp")
+      .orderBy("timestamp", "desc")
       .onSnapshot((snapshot) => {
         console.log("firebase result");
         console.log(snapshot.docs);

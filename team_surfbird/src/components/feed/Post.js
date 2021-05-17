@@ -6,6 +6,7 @@ import {
   Button,
   GridList,
   Grid,
+  FormHelperText,
 } from "@material-ui/core";
 import db from "./../../firebase";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -36,6 +37,8 @@ const data = "";
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
+    margin: 10,
+
   },
   bullet: {
     display: "inline-block",
@@ -48,6 +51,10 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+  topBox:{
+      display: "flex",
+      justifyContent: "space-between"
+  }
 });
 
 export default function SimpleCard(props) {
@@ -100,8 +107,10 @@ export default function SimpleCard(props) {
 
   return (
     <Card className={classes.root}>
-      <CardContent>
-        <Typography
+      <topBox>
+      <Typography
+          display="inline"
+          align="left"
           className={classes.title}
           color="textSecondary"
           gutterBottom
@@ -109,7 +118,9 @@ export default function SimpleCard(props) {
         >
           {props.post.user}
         </Typography>
-
+      </topBox>
+      <CardContent>
+        
         <Typography variant="h5" component="h2">
           {props.post.title}
         </Typography>
@@ -155,6 +166,7 @@ export default function SimpleCard(props) {
           </Badge>
         </IconButton>
 
+        {localStorage.getItem("user") == props.post.user ? (
         <Button
           color="secondary"
           disabled={

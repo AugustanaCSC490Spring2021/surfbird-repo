@@ -55,6 +55,10 @@ const useStyles = makeStyles({
   title: {
     fontSize: 14,
   },
+  titleTwo: {
+    fontSize: 14,
+    align: "right"
+  },
   pos: {
     marginBottom: 12,
   },
@@ -116,26 +120,30 @@ export default function SimpleCard(props) {
 
   return (
     <Card className={classes.root}>
-      <topBox>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+      
       <Typography
           display="inline"
           align="left"
-          className={classes.title}
+          className={classes.titleTwo}
           color="textSecondary"
           gutterBottom
         >
         Posted By {props.post.user}
         </Typography>
-        <br></br><Typography
+        </Grid>
+        <Grid item xs={6}><Typography
           display="inline"
-          align="left"
-          className={classes.title}
+          align="right"
+          className={classes.titleTwo}
           color="textSecondary"
           gutterBottom
         >
         <ReactTimeAgo date={props.post.timestamp} locale="en-US" timeStyle="twitter"/>
         </Typography>
-      </topBox>
+        </Grid>
+        </Grid>
       <CardContent>
         
         <Typography variant="h5" component="h2">

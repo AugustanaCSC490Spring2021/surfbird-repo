@@ -31,6 +31,11 @@ import CommentIcon from "@material-ui/icons/Comment";
 import clsx from "clsx";
 import Divider from "@material-ui/core/Divider";
 import Badge from "@material-ui/core/Badge";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import Favorite from "@material-ui/icons/Favorite";
+import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 
 const data = "";
 
@@ -38,7 +43,6 @@ const useStyles = makeStyles({
   root: {
     minWidth: 275,
     margin: 10,
-
   },
   bullet: {
     display: "inline-block",
@@ -51,10 +55,10 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
-  topBox:{
-      display: "flex",
-      justifyContent: "space-between"
-  }
+  topBox: {
+    display: "flex",
+    justifycontent: "space-between",
+  },
 });
 
 export default function SimpleCard(props) {
@@ -107,20 +111,24 @@ export default function SimpleCard(props) {
 
   return (
     <Card className={classes.root}>
-      <topBox>
-      <Typography
-          display="inline"
-          align="left"
-          className={classes.title}
-          color="textSecondary"
-          gutterBottom
-          fontSize="1px"
-        >
-          {props.post.user}
-        </Typography>
-      </topBox>
       <CardContent>
-        
+        <topBox>
+          <Typography
+            display="inline"
+            align="left"
+            className={classes.title}
+            color="textSecondary"
+            gutterBottom
+          ></Typography>
+          <Typography
+            display="inline"
+            align="right"
+            variant="body1"
+            component="p"
+          >
+            {props.post.timestamp}
+          </Typography>
+        </topBox>
         <Typography variant="h5" component="h2">
           {props.post.title}
         </Typography>
@@ -166,7 +174,6 @@ export default function SimpleCard(props) {
           </Badge>
         </IconButton>
 
-        {localStorage.getItem("user") == props.post.user ? (
         <Button
           color="secondary"
           disabled={
@@ -202,7 +209,19 @@ export default function SimpleCard(props) {
                       {c.comment}
                     </Typography>
                   </ListItemText>
-                  <Divider variant="inset" component="li" />
+                  <ListItemSecondaryAction>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          icon={<FavoriteBorder />}
+                          checkedIcon={<Favorite />}
+                          name="checked"
+                        />
+                      }
+                    />
+                  </ListItemSecondaryAction>
+
+                  <Divider variant="inset" />
                 </ListItem>
               ))}
             </ul>

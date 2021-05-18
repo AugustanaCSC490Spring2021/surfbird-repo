@@ -36,6 +36,7 @@ import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import ReactTimeAgo from 'react-time-ago'
 
 
 const data = "";
@@ -123,7 +124,16 @@ export default function SimpleCard(props) {
           color="textSecondary"
           gutterBottom
         >
-        {props.post.user} @ {props.post.timestamp}
+        Posted By {props.post.user}
+        </Typography>
+        <br></br><Typography
+          display="inline"
+          align="left"
+          className={classes.title}
+          color="textSecondary"
+          gutterBottom
+        >
+        <ReactTimeAgo date={props.post.timestamp} locale="en-US" timeStyle="twitter"/>
         </Typography>
       </topBox>
       <CardContent>
@@ -284,6 +294,10 @@ export default function SimpleCard(props) {
             >
               Post
             </Button>
+            <div className={classes.topBox}>
+              <p>textSecondary</p>
+              <p>test</p>
+            </div>
           </DialogActions>
         </Dialog>
 

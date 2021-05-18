@@ -45,7 +45,6 @@ const useStyles = makeStyles({
   root: {
     minWidth: 275,
     margin: 10,
-
   },
   bullet: {
     display: "inline-block",
@@ -62,10 +61,10 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
-  topBox:{
-      display: "flex",
-      justifyContent: "space-between"
-  }
+  topBox: {
+    display: "flex",
+    justifycontent: "space-between",
+  },
 });
 
 export default function SimpleCard(props) {
@@ -89,8 +88,6 @@ export default function SimpleCard(props) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
-
 
   let button;
   let isLoggedIn;
@@ -145,7 +142,23 @@ export default function SimpleCard(props) {
         </Grid>
         </Grid>
       <CardContent>
-        
+        <topBox>
+          <Typography
+            display="inline"
+            align="left"
+            className={classes.title}
+            color="textSecondary"
+            gutterBottom
+          ></Typography>
+          <Typography
+            display="inline"
+            align="right"
+            variant="body1"
+            component="p"
+          >
+            {props.post.timestamp}
+          </Typography>
+        </topBox>
         <Typography variant="h5" component="h2">
           {props.post.title}
         </Typography>
@@ -191,67 +204,58 @@ export default function SimpleCard(props) {
           </Badge>
         </IconButton>
 
-        {localStorage.getItem("user") == props.post.user ? (
         <Button
-        color="secondary"
-        disabled={
-          localStorage.getItem("user") === props.post.user ? false : true
-        }
-        visibility={
-          localStorage.getItem("user") === props.post.user
-            ? "hidden"
-            : "hidden"
-        }
-        fontSize="small"
-        onClick={(event) =>
-          db.collection("posts").doc(props.post.id).delete()
-        }
-      >
-        Delete
-      </Button>
-      ) : (
-        <div></div>
-      )}
-        
-
-       
+          color="secondary"
+          disabled={
+            localStorage.getItem("user") === props.post.user ? false : true
+          }
+          visibility={
+            localStorage.getItem("user") === props.post.user
+              ? "hidden"
+              : "hidden"
+          }
+          fontSize="small"
+          onClick={(event) =>
+            db.collection("posts").doc(props.post.id).delete()
+          }
+        >
+          Delete
+        </Button>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <div>
-        Comments: {props.post.comments.length}
-        <ul>
-          {props.post.comments.map((c) => (
+            Comments: {props.post.comments.length}
+            <ul>
+              {props.post.comments.map((c) => (
+                <ListItem alignItems="flex-start">
+                  <ListItemText>
+                    <Typography
+                      component="span"
+                      variant="body2"
+                      className={classes.inline}
+                      color="textPrimary"
+                    >
+                      {c.comment}
+                    </Typography>
+                  </ListItemText>
+                  <ListItemSecondaryAction>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          icon={<FavoriteBorder />}
+                          checkedIcon={<Favorite />}
+                          name="checked"
+                        />
+                      }
+                    />
+                  </ListItemSecondaryAction>
 
-            <ListItem alignItems="flex-start">
-              <ListItemText>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                {c.comment}
-              </Typography>
-                    
-              </ListItemText>
-              <ListItemSecondaryAction>
-              
-                <FormControlLabel
-                control={<Checkbox 
-                icon={<FavoriteBorder />} 
-                checkedIcon={<Favorite />} 
-                name="checked" />}
-              />
-            </ListItemSecondaryAction>
-
-              <Divider variant="inset" />
-
-            </ListItem>
-            
-          ))}
-        </ul>
-      </div>
+                  <Divider variant="inset" />
+                </ListItem>
+              ))}
+            </ul>
+          </div>
 
           <Button variant="outlined" color="primary" onClick={handleClickOpen}>
           Comment
